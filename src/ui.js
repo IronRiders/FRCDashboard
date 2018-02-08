@@ -1,3 +1,4 @@
+
 // Define UI elements
 let ui = {
     timer: document.getElementById('timer'),
@@ -13,8 +14,8 @@ let ui = {
     robotDiagram: {
         arm: document.getElementById('robot-arm')
     },
-    example: {
-        button: document.getElementById('example-button'),
+    dataTable: {
+        button: document.getElementById('dataTable'),
         readout: document.getElementById('example-readout').firstChild
     },
     autoSelect: document.getElementById('auto-select'),
@@ -22,6 +23,8 @@ let ui = {
 };
 
 // Key Listeners
+
+
 
 // Gyro rotation
 let updateGyro = (key, value) => {
@@ -33,6 +36,8 @@ let updateGyro = (key, value) => {
     ui.gyro.arm.style.transform = `rotate(${ui.gyro.visualVal}deg)`;
     ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
 };
+
+
 NetworkTables.addKeyListener('/SmartDashboard/drive/navx/yaw', updateGyro);
 
 // The following case is an example, for a robot with an arm at the front.
@@ -47,15 +52,26 @@ NetworkTables.addKeyListener('/SmartDashboard/arm/encoder', (key, value) => {
     // Calculate visual rotation of arm
     var armAngle = value * 3 / 20 - 45;
     // Rotate the arm in diagram to match real arm
+
     ui.robotDiagram.arm.style.transform = `rotate(${armAngle}deg)`;
 });
 
-// This button is just an example of triggering an event on the robot by clicking a button.
-NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) => {
-    // Set class active if value is true and unset it if it is false
-    ui.example.button.classList.toggle('active', value);
-    ui.example.readout.data = 'Value is ' + value;
+NetworkTables.addKeyListener('/SmartDashboard/X',(key,value)=>{
+
+    //value = NetworkTables.getValue("/SmartDashboard//SmartDashboard/X");
+    document.getElementById("code-state").innerHTML = value;
+
 });
+
+
+// This button is just an example of triggering an event on the robot by clicking a button.
+
+// NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) => {
+//     // Set class active if value is true and unset it if it is false
+//     ui.example.button.classList.toggle('active', value);
+//     ui.example.readout.data = 'Value is ' + value;
+
+// });
 
 NetworkTables.addKeyListener('/robot/time', (key, value) => {
     // This is an example of how a dashboard could display the remaining time in a match.
@@ -69,12 +85,13 @@ NetworkTables.addKeyListener('/SmartDashboard/autonomous/modes', (key, value) =>
     while (ui.autoSelect.firstChild) {
         ui.autoSelect.removeChild(ui.autoSelect.firstChild);
     }
-    // Make an option for each autonomous mode and put it in the selector
-    for (let i = 0; i < value.length; i++) {
-        var option = document.createElement('option');
-        option.appendChild(document.createTextNode(value[i]));
+
+    value.forEach((mode) => {
+        const option = document.createElement('option');
+        option.appendChild(document.createTextNode(mode));
         ui.autoSelect.appendChild(option);
-    }
+    });
+
     // Set value to the already-selected mode. If there is none, nothing will happen.
     ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
 });
@@ -85,9 +102,11 @@ NetworkTables.addKeyListener('/SmartDashboard/autonomous/selected', (key, value)
 });
 
 // The rest of the doc is listeners for UI elements being clicked on
-ui.example.button.onclick = function() {
+ui.dataTable.button.onclick = function() {
     // Set NetworkTables values to the opposite of whether button has active class.
-    NetworkTables.putValue('/SmartDashboard/example_variable', this.className != 'active');
+    alert(NetworkTables.getKeys());
+
+    //NetworkTables.putValue('/SmartDashboard/example_variable', this.className != 'active');
 };
 // Reset gyro value to 0 on click
 ui.gyro.container.onclick = function() {

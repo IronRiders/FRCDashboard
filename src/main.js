@@ -14,6 +14,8 @@ const BrowserWindow = electron.BrowserWindow;
 /** Module for receiving messages from the BrowserWindow */
 const ipc = electron.ipcMain;
 
+
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 /**
@@ -86,7 +88,7 @@ function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 1366,
-        height: 570,
+        height: 1000,
         // 1366x570 is a good standard height, but you may want to change this to fit your DriverStation's screen better.
         // It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
         // The window is closed until the python server is ready
@@ -97,10 +99,13 @@ function createWindow() {
     mainWindow.setPosition(0, 0);
     // Load window.
     mainWindow.loadURL(`file://${__dirname}/index.html`);
+
+
     // Once the python server is ready, load window contents.
     mainWindow.once('ready-to-show', () => {
         console.log('main window is ready to be shown');
         mainWindow.show();
+
     });
 
     // Remove menu
@@ -122,12 +127,18 @@ function createWindow() {
         console.log('window failed load');
     });
 }
+
+
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', () => {
     console.log('app is ready');
     createWindow();
+
 });
+
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
