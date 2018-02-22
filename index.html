@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>FRC Dashboard</title>
+    <link href="css/style.css" rel="stylesheet">
+<!--     <script>window.$ = window.jQuery = require('jquery');</script> -->
+
+    <script src="networktables/networktables.js"></script>
+    <script src="connection.js"></script>
+    <script src="ui.js"></script>
+    <script src="node_modules/Gauge/dist/scripts/gauge.min.js"></script>
+    <script src="js/gauge.min.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+
+    <div id="timer">2:15</div>
+    <p id="element-selector">  Auto Mode</p>
+
+    <select id="auto-selector"></select>
+    <header>
+        <!-- Tells whether robot is connected to dashboard. -->
+
+        <img src="ironriders.jpg" width = "50%">
+<!--         <div>
+        <div id="robot-state">Robot: Unknown state</div>
+        <br>
+        <div id="camera-state">Camera: Unknown state</div>
+        <br>
+        <div id="code-state">Code: Unknown state</div>
+        </div> -->
+    </header>
+    
+    <div id="camera"></div>
+    <article>
+        <div id="velocity">
+            <h1> Speed </h1>
+            <canvas id="gauge1"></canvas>
+            <canvas id="gauge2"></canvas>
+      
+        </div>
+        <div id="acceleration">
+            <h1> Acceleration </h1> 
+            <canvas id="gauge3"></canvas>  
+            <canvas id="gauge4"></canvas>            
+            <br>
+            <canvas id="gauge5"></canvas>  
+            <canvas id="gauge6"></canvas>   
+        </div>
+
+        <div id="diagram">
+            <img src="http://img.time2draw.com/2014/06/Robot-step-by-step-15-215x382.png">
+        </div>
+    </article>
+    <aside>
+
+
+        <div id="battery">
+            <h1>Battery</h1>
+
+            <div id ="battery_box">
+               <div id="battery_level"></div>
+            </div>
+            <div>
+                000%   0 mV
+            </div>
+        </div>
+        <div id="motors">
+            <h1> Motors</h1>
+            <div>
+                <div class="drive-motor">0.00 deg/s</div>
+                <div class="drive-motor">0.00 deg/s</div>
+                <div class="drive-motor">0.00 deg/s</div>
+                <div class="drive-motor">0.00 deg/s</div>
+            </div>
+            <div>
+                <div class="cube-motor">0.00 deg/s</div>
+                <div class="cube-motor">0.00 deg/s</div>
+            </div>
+            <button id="dataTable" > show smarttable!!!!!!!</button>
+        </div>
+    </aside>
+    <div id="login">
+        <input id="connect-address" type="text" value="localhost" disabled>
+        <button id="connect" disabled>Connecting</button>
+    </div>
+
+
+    
+    <script>
+//             $.getScript("js/gauge.min.js", function() {
+//    alert("Script loaded but not necessarily executed.");
+// });
+
+            
+
+            var a = new RadialGauge({
+                renderTo: 'gauge1',
+                width: 300,
+                height: 300,
+                units: 'Km/h',
+                title: false,
+                value: 0,
+                minValue: 0,
+                maxValue: 220,
+                majorTicks: [
+                    '0','20','40','60','80','100','120','140','160','180','200','220'
+                ],
+                minorTicks: 2,
+                strokeTicks: false,
+                highlights: [
+                    { from: 0, to: 50, color: 'rgba(0,255,0,.15)' },
+                    { from: 50, to: 100, color: 'rgba(255,255,0,.15)' },
+                    { from: 100, to: 150, color: 'rgba(255,30,0,.25)' },
+                    { from: 150, to: 200, color: 'rgba(255,0,225,.25)' },
+                    { from: 200, to: 220, color: 'rgba(0,0,255,.25)' }
+                ],
+                colorPlate: '#222',
+                colorMajorTicks: '#f5f5f5',
+                colorMinorTicks: '#ddd',
+                colorTitle: '#fff',
+                colorUnits: '#ccc',
+                colorNumbers: '#eee',
+                colorNeedle: 'rgba(240, 128, 128, 1)',
+                colorNeedleEnd: 'rgba(255, 160, 122, .9)',
+                valueBox: true,
+                animationRule: 'bounce',
+                animationDuration: 500
+            });
+            a.draw();
+            new RadialGauge({ 
+                renderTo: 'gauge2',  
+                width: 200,
+                height: 200 }).draw();
+            new RadialGauge({ 
+                renderTo: 'gauge3',  
+                width: 100,
+                height: 100 }).draw();
+            new RadialGauge({ 
+                renderTo: 'gauge4',  
+                width: 100,
+                height: 100 }).draw();
+            new RadialGauge({ 
+                renderTo: 'gauge5',  
+                width: 100,
+                height: 100 }).draw();
+            new RadialGauge({ 
+                renderTo: 'gauge6',  
+                width: 100,
+                height: 100 }).draw();
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
