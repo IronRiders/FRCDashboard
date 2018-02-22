@@ -36,12 +36,16 @@ function createWindow() {
 
     // Load window.
     mainWindow.loadURL('http://localhost:8888');
-    console.log("ddd");
+    console.log("plz open this url: http://localhost:8888");
 
     // Once the python server is ready, load window contents.
     // TODO: fix this abnomination
     mainWindow.once('ready-to-show', function() {
         mainWindow.loadURL('http://localhost:8888');
+
+        // the below code is showing the dashboard by open a window, but the gauage library 
+        // can't work on that window 
+
         // mainWindow.once('ready-to-show', function() {
         //     // Once it has reloaded, show the window
         //     mainWindow.show();

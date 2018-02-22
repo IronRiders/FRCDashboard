@@ -24,16 +24,25 @@ let ui = {
 
 // Key Listeners
 
-
+// showing the data key in smartdashboard
 ui.dataTable.button.onclick = function() {
-    // Set NetworkTables values to the opposite of whether button has active class.
 
     NetworkTables.putValue('/SmartDashboard/autonomous/selected', "sss");
     alert(NetworkTables.getKeys());
     alert(NetworkTables.getValue("/SmartDashboard/robot/time"));
-
-    //NetworkTables.putValue('/SmartDashboard/example_variable', this.className != 'active');
 };
+
+// update the time
+NetworkTables.addKeyListener('/robot/time', (key, value) => {
+    // This is an example of how a dashboard could display the remaining time in a match.
+    // We assume here that value is an integer representing the number of seconds left.
+    ui.timer.innerHTML = value < 0 ? '0:00' : Math.floor(value / 60) + ':' + (value % 60 < 10 ? '0' : '') + value % 60;
+});
+
+// update the speed 
+NetworkTables.addKeyListener('/SmartDashboard/speed',(ket,value) =>{
+        gauge1.value = value;
+});
 
 // Gyro rotation
 // let updateGyro = (key, value) => {
@@ -82,11 +91,7 @@ ui.dataTable.button.onclick = function() {
 
 // // });
 
-// NetworkTables.addKeyListener('/robot/time', (key, value) => {
-//     // This is an example of how a dashboard could display the remaining time in a match.
-//     // We assume here that value is an integer representing the number of seconds left.
-//     ui.timer.innerHTML = value < 0 ? '0:00' : Math.floor(value / 60) + ':' + (value % 60 < 10 ? '0' : '') + value % 60;
-// });
+
 
 // // Load list of prewritten autonomous modes
 // NetworkTables.addKeyListener('/SmartDashboard/autonomous/modes', (key, value) => {
