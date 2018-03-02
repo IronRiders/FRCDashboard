@@ -1,3 +1,4 @@
+let ipc = require('electron').ipcRenderer;
 let address = document.getElementById('connect-address'),
     connect = document.getElementById('connect');
 
@@ -11,6 +12,8 @@ NetworkTables.addRobotConnectionListener(onRobotConnection, false);
 //NetworkTables.addGlobalListener(onValueChanged, true);
 
 // Function for hiding the connect box
+
+console.log("ssss");
 onkeydown = key => {
     if (key.key === 'Escape') document.body.classList.toggle('login', false);
 };
@@ -20,11 +23,9 @@ onkeydown = key => {
  * @param {boolean} connected
  */
 function onRobotConnection(connected) {
-
-    // var state = connected ? 'Robot connected!' : 'Robot disconnected.';
-    // console.log(state);
-    // ui.robotState.textContent = state;
-    
+    var state = connected ? 'Robot connected!' : 'Robot disconnected.';
+    console.log(state);
+    //ui.robotState.textContent = state;
     if (connected) {
         // On connect hide the connect popup
         document.body.classList.toggle('login', false);
@@ -40,7 +41,7 @@ function onRobotConnection(connected) {
         address.disabled = connect.disabled = false;
         connect.textContent = 'Connect';
         // Add the default address and select xxxx
-        address.value = '10.41.80.2';
+        address.value = '10.41.80.';
         address.focus();
         address.setSelectionRange(8, 12);
         // On click try to connect and disable the input and the button

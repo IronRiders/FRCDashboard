@@ -1,4 +1,6 @@
+console.log("ddddd");
 let ipc = require('electron').ipcRenderer;
+
 
 var NetworkTables =
     (() => {

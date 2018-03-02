@@ -10,6 +10,8 @@ const BrowserWindow = electron.BrowserWindow;
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+const ipc = electron.ipcMain;
+
 // Define global reference to the python server (which we'll start next).
 let server;
 
@@ -40,16 +42,17 @@ function createWindow() {
 
     // Once the python server is ready, load window contents.
     // TODO: fix this abnomination
-    mainWindow.once('ready-to-show', function() {
-        mainWindow.loadURL('http://localhost:8888');
+
 
         // the below code is showing the dashboard by open a window, but the gauage library 
         // can't work on that window 
 
-        // mainWindow.once('ready-to-show', function() {
-        //     // Once it has reloaded, show the window
-        //     mainWindow.show();
-        // });
+    mainWindow.once('ready-to-show', function() {
+        mainWindow.loadURL('http://localhost:8888');
+        mainWindow.once('ready-to-show', function() {
+            // Once it has reloaded, show the window
+            mainWindow.show();
+        });
     });
 
     // Remove menu
@@ -62,6 +65,7 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
+
 }
 
 // This method will be called when Electron has finished

@@ -27,7 +27,7 @@ let ui = {
 // showing the data key in smartdashboard
 ui.dataTable.button.onclick = function() {
 
-    NetworkTables.putValue('/SmartDashboard/autonomous/selected', "sss");
+    NetworkTables.putValue('SmartDashboard/autonomous/selected', "sss");
     alert(NetworkTables.getKeys());
     alert(NetworkTables.getValue("/SmartDashboard/robot/time"));
 };

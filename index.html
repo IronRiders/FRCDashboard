@@ -46,6 +46,7 @@
                 <canvas id="gauge6"></canvas>   
             </div> -->
 
+
             <div id="diagram">
                 <img src="http://img.time2draw.com/2014/06/Robot-step-by-step-15-215x382.png">
             </div>
@@ -62,6 +63,14 @@
                 000%   0 mV
             </div>
         </div>
+
+        <svg id="gyro">
+            <circle cx="85" cy="85" r="83"></circle>
+            <circle cx="85" cy="85" r="50"></circle>
+            <rect id="gyro-arm" x="80" y="5" width="10" height="80"></rect>
+            <text id="gyro-number" x="90" y="115">0º</text>
+        </svg>
+
         <div id="motors">
             <h1> Motors</h1>
             <div>
@@ -75,24 +84,18 @@
                 <div class="cube-motor">0.00 deg/s</div>
             </div>
         </div>
-        <svg id="gyro">
-            <circle cx="85" cy="85" r="83"></circle>
-            <circle cx="85" cy="85" r="50"></circle>
-            <rect id="gyro-arm" x="80" y="5" width="10" height="80"></rect>
-            <text id="gyro-number" x="90" y="115">0º</text>
-        </svg>
+
         <button id="dataTable" > show smarttable!!!!!!!</button>
         </aside>
         
-        <div id="login">
-            <input id="connect-address" type="text" value="localhost" disabled>
-            <button id="connect" disabled>Connecting</button>
-        </div>
+<div id="login">
+        <input id="connect-address" type="text" value="localhost" disabled>
+        <button id="connect" disabled>Connecting</button>
+    </div>
+    <script src="networktables/networktables.js"></script>
 
-        
         <script src="js/connection.js"></script>
         <script src="js/gaugeUI.js"></script>
-        <script src="networktables/networktables.js"></script>
         <script src="js/ui.js"></script>
 
     </body>

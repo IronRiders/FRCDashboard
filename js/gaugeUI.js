@@ -1,8 +1,8 @@
           
 var gauge1 = new RadialGauge({
     renderTo: 'gauge1',
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
     units: 'Km/h',
     title: false,
     value: 0,
@@ -36,8 +36,8 @@ gauge1.draw();
 var gauge2 = new RadialGauge({ 
     renderTo: 'gauge2',  
 
-    width: 250,
-    height: 250,
+    width: 200,
+    height: 200,
     units: 'degree/s',
     title: false,
     value: 0,

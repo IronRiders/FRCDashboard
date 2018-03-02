@@ -120,7 +120,6 @@ aside > * {
 #login {
     position: fixed;
     display: none;
-
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -157,6 +156,9 @@ body.login #login {
 #diagram{
     margin-top: 120px;
 }
+#battery{
+    margin-left: 80px;
+}
 #battery_box {
     display: inline-block;
     position: relative;
@@ -181,8 +183,9 @@ aside, body, article, header, #timer{
     background: #0e3b0a ;
 }
 #gauge1{
-    margin-right: 30px;
+    
+    margin-right: 0px;
 }
 #gyro{
-    height: 20%;
+    height: 23%;
 }
